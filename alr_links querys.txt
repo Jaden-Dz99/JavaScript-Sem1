@@ -1,0 +1,45 @@
+alr_links
+
+
+SEEDING TABLE QUERYS
+-------------------------------------------------------------------------------------------------------------------------------------------
+INSERT IGNORE INTO tags
+	(id, tag, description, created_at, updated_at)
+VALUES
+	(NULL, 'OSH', 'Occupational Safety and Health', NOW(), NOW()), 
+	(NULL, 'Video', 'Recording, reproducing, or broadcasting of moving visual images', NOW(), NOW()),
+	(NULL, 'Java', 'A programming langauge used for Desktop, Mobile and Web Applications', NOW(), NOW()),
+	(NULL, 'Programming', 'The process of writing computer programs', NOW(), NOW()),
+	(NULL, 'Web', 'Combination of all users and pages on the internet', NOW(), NOW()),
+	(NULL, 'Tutorial', 'A period of tuition usually given by a tutor or teacher', NOW(), NOW()),
+	(NULL, 'C#', 'General purpose OOP language commonly used for .NET developing', NOW(), NOW());
+	(NULL, 'PHP', 'Hypertext Preprocessor Web Scripting Language', NOW(), NOW()),
+	(NULL, 'MySQL', 'Open source database management system', NOW(), NOW()),
+	(10, 'Database', 'Structured set of data hrld in a computer', NOW(), NOW()),
+	(NULL, 'Boostrap', 'A web front and framework', NOW(), NOW()),
+	(NULL, 'Javascript', 'Web front-end and back-end programming language, alsso correctly known as ECMAScript', NOW(), NOW()),
+	(NULL, 'AJAX', 'Acronym for Asynchronus Javascript and XML', NOW(), NOW()),
+	(NULL, 'LMS', 'Initialism for Learning Management System', NOW(), NOW()),
+	(22, 'Object Orientated Programming', 'Programming organised around data or objects, rather than functionsor logic', NOW(), NOW()),
+	(NULL, 'OOP', 'Acronym for Object Orientated Programming', NOW(), NOW()),
+	(NULL, 'Class', 'A set of coding blueprints to provide a service within an OOP language', NOW(), NOW());
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+BROWSE (SELECT) TAG DATA QUERYS
+-------------------------------------------------------------------------------------------------------------------------
+<< show all Tags table including all fields >>
+SHOW COLUMNS FROM tags FROM alr_links;
+
+<< selecting specific feilds from table >>
+SELECT tag, created_at FROM tags;
+
+<< ORDERING FIELDS QUERY >>
+SELECT * FROM tags ORDER BY tag DESC
+SELECT * FROM tags ORDER BY tag ASC
+SELECT * FROM tags ORDER BY id DESC
+
+<< searching by specific word >>
+SELECT * FROM tags WHERE description LIKE '%programming%';
+SELECT * FROM tags WHERE description LIKE '%code%';

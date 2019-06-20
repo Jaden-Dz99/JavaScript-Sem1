@@ -1,0 +1,101 @@
+HEIDI-SQL QUERY TAGS / SQL CODE
+
+CREATION OF DATABASE
+------------------------------------------------------------
+SELECT CONNECTION_ID();
+/* Connected. Thread-ID: 24 */
+/* Characterset: utf8mb4 */
+SHOW STATUS;
+SHOW VARIABLES;
+SHOW DATABASES;
+/* Entering session "alr_links" */
+SHOW VARIABLES LIKE 'skip_name_resolve';
+FLUSH PRIVILEGES;
+SHOW COLUMNS FROM `mysql`.`user`;
+SELECT `user`, `host`, authentication_string AS `password` FROM `mysql`.`user`;
+CREATE USER 'alr_links'@'localhost' IDENTIFIED BY 'SecretPassword1';
+GRANT EXECUTE, PROCESS, SELECT, SHOW DATABASES, SHOW VIEW, ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TABLESPACE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, INDEX, INSERT, REFERENCES, TRIGGER, UPDATE, CREATE USER, FILE, LOCK TABLES, RELOAD, REPLICATION CLIENT, REPLICATION SLAVE, SHUTDOWN, SUPER  ON *.* TO 'alr_links'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+SHOW GRANTS FOR 'alr_links'@'localhost';
+-------------------------------------------------------------------
+
+
+
+CREATE TAGS TABLE WITHIN 'alr_links' DATABASE
+---------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tags` (
+        id INT (11) NOT NULL AUTO_INCREMENT,
+        tag VARCHAR (255),
+        description VARCHAR (255),
+        created_at DATETIME DEFAULT '1000-01-01 00:00:00',
+        updated_at DATETIME DEFAULT '1000-01-01 00:00:00',
+        PRIMARY KEY (id),
+        UNIQUE(tag)
+    );
+------------------------------------------------
+
+
+
+SEED `tags` TABLE
+----------------------------------------------------------------
+INSERT IGNORE INTO tags
+        (id, tag, description, created_at, updated_at)
+VALUES  (3, 'PHP', 'Hypertext Preprocessor', DATE_SUB(NOW(), INTERVAL 17 DAY), DATE_SUB(NOW(), INTERVAL 17 DAY)),
+        (4, 'MySQL', 'database management system', DATE_SUB(NOW(), INTERVAL 15 DAY), DATE_SUB(NOW(), INTERVAL 15 DAY)),
+        (5, 'Database', 'Structured set of information held in a computer', DATE_SUB(NOW(), INTERVAL 15 DAY), DATE_SUB(NOW(), INTERVAL 15 DAY)),
+        (6, 'Bootstrap', 'Web front end framework', DATE_SUB(NOW(), INTERVAL 15 DAY), DATE_SUB(NOW(), INTERVAL 15 DAY)),
+        (7, 'JavaScript', 'Web front-end and back-end programming language, also correctly known as ECMAScript', DATE_SUB(NO(), INTERVAL 15 SECOND), NOW()),
+        (8, 'AJAX', 'Asynchronous JavaScript and XML',DATE_SUB(NOW(), INTERVAL 15 DAY), DATE_SUB(NOW(), INTERVAL 10 DAY)),
+        (9, 'LMS', 'Initialism for Learning Management System', NOW(), NOW()),
+        (10, 'Object Oriented Programming', 'also known as OOP',DATE_SUB(NOW(), INTERVAL 20 DAY), DATE_SUB(NOW(), INTERVAL 17 DAY)),
+        (11, 'OOP', 'Object Oriented Programming',DATE_SUB(NOW(),INTERVAL 10 SECOND), NOW()),
+        (12, 'Class', 'A specification on how to provide a service in a OOP language', NOW(), NOW());
+---------------------------------------------------------------------------
+
+
+
+CREATE LINKS TABLE
+-------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `links` (
+        id INT (11) UNSIGNED NOT NULL AUTO_INCREMENT,
+        title VARCHAR (64),        
+        url VARCHAR (255) NOT NULL DEFAULT 'http://dummy.url',
+        notes VARCHAR (255) DEFAULT NULL,
+        tags VARCHAR(64) DEFAULT NULL,
+        created_at DATETIME DEFAULT '1000-01-01 00:00:00',
+        updated_at DATETIME DEFAULT '1000-01-01 00:00:00',
+        PRIMARY KEY (id)        
+    );
+--------------------------------------------
+
+
+
+
+SEED 'links' TABLE EXAMPLE
+---------------------------------------------------------
+INSERT IGNORE INTO links
+    (id, title, url, notes, tags, created_at, updated_at)
+VALUES (2, "North Metropolitan TAFE",  	
+        "https://www.northmetrotafe.wa.edu.au/",
+        "The main TAFE website with links to various aspects of the institute and courses available to study.",
+        "web development, programming, database",
+        NOW(), NOW());
+
+
+INSERT IGNORE INTO links
+    (id, title, url, notes, tags, created_at, updated_at)
+VALUES (4, "The only Proper PHP-PDO Tutorial", 
+ 		  "https://phpdelusions.net/pdo",
+        "An extensive tutorial on PHP and PDO programming for databases.",
+        "Database, PDO, MySQL, PHP, Programming, Tutorial",
+        NOW(), NOW());
+------------------------------------------------------------------------------
+
+
+BOUND PARAMETERS / VARIABLES BROWSE
+-------------------------------------------------------------------
+$sqlBrowse = "SELECT * FROM links WHERE title LIKE :findInTitle OR notes LIKE :findInNotes OR tags LIKE :findInTags ORDER BY title";
+
+
+
+

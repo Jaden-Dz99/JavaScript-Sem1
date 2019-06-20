@@ -1,0 +1,33 @@
+SELECT * FROM animals;
+
+SELECT animal_name, date_of_birth FROM animals; 
+
+SELECT id, animal_name FROM animals
+	WHERE animal_name LIKE "Squawk";
+QUERY#2	
+
+
+DELETE FROM animals WHERE id=3;
+
+INSERT INTO animals (animal_name, species, date_of_birth)
+VALUES
+	('dummy', 'dummy', '2010-01-01'),
+	('dummy 2', 'dum-dum', '2133-02-03'),
+	('Trunky', 'elephant', '1890-06-08'),
+	('dooby-doo', 'dummy', '2001-03-01');
+	
+SELECT * FROM animals WHERE species LIKE "dum%";
+SELECT * FROM animals WHERE species LIKE "%dum";
+SELECT * FROM animals WHERE species LIKE "%dum%";
+
+DELETE FROM animals WHERE id IN (11,12,14);
+DELETE FROM animals WHERE id IN (11);
+
+UPDATE animals 
+	SET animal_name='Speedy'
+	WHERE id=8 AND animal_name='Squeek';
+	
+UPDATE animals 
+	SET animal_name='Speedy'
+	    species='tortoise'
+	WHERE id=9;
